@@ -24,7 +24,7 @@ services:
     volumes:
       - dblivres:/data/db
   api_client:
-    build: ./api_client
+    build: ./backend/api_client
     ports:
       - 3000:3000
     environment:
@@ -39,7 +39,7 @@ services:
       - rabbit
       - dbclients
   api_emprunt:
-    build: ./api_emprunt
+    build: ./backend/api_emprunt
     ports:
       - 3001:3000
     environment:
@@ -53,7 +53,7 @@ services:
       - rabbit
       - dbemprunts
   api_livre:
-    build: ./api_livre
+    build: ./backend/api_livre
     ports:
       - 3002:3000
     environment:
@@ -67,7 +67,7 @@ services:
       - rabbit
       - dblivres
   api_notification:
-    build: ./api_notification
+    build: ./backend/api_notification
     ports:
       - 3004:3000
     environment:
@@ -76,6 +76,16 @@ services:
       - q4=api_notification-queue
     depends_on:
       - rabbit
+  frontend:
+    build: ./frontend
+    ports:
+      - 3003:3000 # Adjust port if needed
+    depends_on:
+      - api_client # Assuming frontend depends on client API
+      # ... other dependencies
+      - api_emprunt
+      - api_livre
+      - api_notification
 volumes:
   dbclients:
   dbemprunts:
