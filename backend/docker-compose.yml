@@ -1,0 +1,82 @@
+version: '3.8'
+services:
+  rabbit:
+    image: rabbitmq:3-management
+    ports:
+      - 5672:5672
+      - 15672:15672
+  dbclients:
+    image: mongo
+    ports:
+      - 30000:27017
+    volumes:
+      - dbclients:/data/db
+  dbemprunts:
+    image: mongo
+    ports:
+      - 30001:27017
+    volumes:
+      - dbemprunts:/data/db
+  dblivres:
+    image: mongo
+    ports:
+      - 30002:27017
+    volumes:
+      - dblivres:/data/db
+  api_client:
+    build: ./api_client
+    ports:
+      - 3000:3000
+    environment:
+      - port=3000
+      - url_mongoose=mongodb://dbclients:27017/dbclients
+      - url_rabbit=amqp://guest:guest@rabbit:5672
+      - q1=api_client-queue
+      - q2=api_emprunt-queue
+      - q3=api_livre-queue
+      - q4=api_notification-queue
+    depends_on:
+      - rabbit
+      - dbclients
+  api_emprunt:
+    build: ./api_emprunt
+    ports:
+      - 3001:3000
+    environment:
+      - port=3000
+      - url_mongoose=mongodb://dbemprunts:27017/dbemprunts
+      - url_rabbit=amqp://guest:guest@rabbit:5672
+      - q1=api_client-queue
+      - q2=api_emprunt-queue
+      - q3=api_livre-queue
+    depends_on:
+      - rabbit
+      - dbemprunts
+  api_livre:
+    build: ./api_livre
+    ports:
+      - 3002:3000
+    environment:
+      - port=3000
+      - url_mongoose=mongodb://dblivres:27017/dblivres
+      - url_rabbit=amqp://guest:guest@rabbit:5672
+      - q1=api_client-queue
+      - q2=api_emprunt-queue
+      - q3=api_livre-queue
+    depends_on:
+      - rabbit
+      - dblivres
+  api_notification:
+    build: ./api_notification
+    ports:
+      - 3004:3000
+    environment:
+      - port=3000
+      - url_rabbit=amqp://guest:guest@rabbit:5672
+      - q4=api_notification-queue
+    depends_on:
+      - rabbit
+volumes:
+  dbclients:
+  dbemprunts:
+  dblivres:
