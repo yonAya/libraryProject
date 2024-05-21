@@ -1,0 +1,21 @@
+/* Accueil.css */
+
+.accueil {
+    padding: 20px;
+  }
+  
+  .content {
+    display: flex;
+    justify-content: space-between; /* Répartit l'espace entre les éléments */
+    align-items: center; /* Alignement vertical centré */
+  }
+  
+  .text {
+    flex: 1; /* Permet au texte de prendre tout l'espace disponible */
+  }
+  
+  .welcome-image {
+    width: 50%; /* Largeur de l'image */
+    max-width: 400px; /* Largeur maximale de l'image */
+  }
+  
