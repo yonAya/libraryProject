@@ -1,0 +1,9 @@
+
+.footer {
+    background: -webkit-linear-gradient(90deg, #6d56b6,#5570d2,#149cad);
+    background: linear-gradient(90deg, #6d56b6,#5570d2,#149cad);                                            
+    color: white;
+    text-align: center;
+    padding: 5px 0;
+  }
+  
