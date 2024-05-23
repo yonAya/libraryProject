@@ -1,18 +1,18 @@
 // Navbar.jsx
 
 import React from 'react';
-import { FcLibrary } from "react-icons/fc"; // Importation de l'icône FcLibrary
+import { Link } from 'react-router-dom'; // Importez Link depuis React Router
+import { FcLibrary } from "react-icons/fc";
 import './Navbar.css'; 
 
 function Navbar() {
   return (
     <div className="navbar">
       <div className="left">
-        
-        <span className="site-name"> <FcLibrary />BibliOnline</span>
+        <Link to="/" className="site-name"> <FcLibrary />BibliOnline</Link> 
       </div>
       <div className="center">
-        <button className="navbar-button">Livre</button>
+        <Link to="/livre" className="navbar-button">Livre</Link> 
         <button className="navbar-button">Emprunt</button>
         <button className="navbar-button">Client</button>
       </div>

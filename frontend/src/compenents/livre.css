@@ -1,0 +1,65 @@
+/* Container principal */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  /* Titre principal */
+  h1 {
+    font-size: 2rem;
+    color: #333;
+    text-align: center;
+  }
+  
+  /* Liste des livres */
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  /* Éléments de la liste des livres */
+  li {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+  }
+  
+  /* Boutons d'action */
+  button {
+    cursor: pointer;
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+  }
+  
+  /* Bouton Ajouter */
+  button.add-button {
+    margin-top: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  /* Détails du livre */
+  .book-details {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+  }
+  
+  /* Détails du livre - Titre */
+  .book-details h2 {
+    font-size: 1.5rem;
+    color: #333;
+  }
+  
+  /* Détails du livre - Propriétés */
+  .book-details p {
+    margin-bottom: 10px;
+  }
+  
