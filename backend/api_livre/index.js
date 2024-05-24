@@ -1,28 +1,25 @@
+import express from 'express';
+import mongoose from 'mongoose';
+import livre from './routes/livreRoute.js';
 
-import express from 'express'
-import dotnev from 'dotenv'
-import mongoose from 'mongoose'
-import livre from './routes/livreRoute'
+const port = process.env.port;
+const url_mongoose = process.env.url_mongoose;
+const app = express();
 
-dotnev.config()
+app.use(express.json());
 
-const port = process.env.port
-const url = process.env.url_mongoose
-const app=express()
+mongoose
+  .connect(url_mongoose)
+  .then(() => {
+    console.log('Connected to mongo');
+  })
+  .catch((err) => {
+    console.log('Unable to connect to mongo : ' + err);
+  });
 
-app.use(express.json())
-
-mongoose.connect(url).then(() =>{
-    console.log('Connected to mongo')
-}).catch((err) => {
-    console.log('Unable to connect to mongo : ' + err)
-})
-
-app.use('/livre', routes)
+app.use('/livre/api/v1/livre', livre);
 
 app.listen(port, (err) => {
-    if(err)
-        console.log('Unable to start server :' + err)
-    else
-        console.log('Server started')
-})
+  if (err) console.log('Unable to start server :' + err);
+  else console.log('Server started at ' + port);
+});
