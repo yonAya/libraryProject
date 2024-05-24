@@ -1,8 +1,8 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import livrerouter from './routes/livrerouter.js';
-import clientrouter from './routes/clientrouter.js';
-import empruntrouter from './routes/empruntrouter.js';
+// import livrerouter from './routes/livrerouter.js';
+// import clientrouter from './routes/clientrouter.js';
+import empruntrouter from './routes/empruntRoutes.js';
 
 const app = express();
 app.use(express.json());
