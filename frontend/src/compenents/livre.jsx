@@ -14,15 +14,18 @@ function Livre() {
   const [livreSelectionne, setLivreSelectionne] = useState(null);
 
   useEffect(() => {
-    axios.get('http://localhost:3000/api/v1/livre')
-      .then(response => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://localhost:3001/api/v1/livre');
         setLivres(response.data);
-      })
-      .catch(error => {
-        console.error('Erreur lors de la récupération des livres:', error);
-      });
+      } catch (error) {
+        console.error('Erreur lors de la récupération des livres :', error);
+      }
+    };
+  
+    fetchData();
   }, []);
-
+  
   const afficherDetails = (livre) => {
     setLivreSelectionne(livre);
   };
