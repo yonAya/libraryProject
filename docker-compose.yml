@@ -31,10 +31,7 @@ services:
       - port=3000
       - url_mongoose=mongodb://dbclients:27017/dbclients
       - url_rabbit=amqp://guest:guest@rabbit:5672
-      - q1=api_client-queue
-      - q2=api_emprunt-queue
-      - q3=api_livre-queue
-      - q4=api_notification-queue
+      - q3=api_notification-queue
     depends_on:
       - rabbit
       - dbclients
@@ -46,9 +43,8 @@ services:
       - port=3000
       - url_mongoose=mongodb://dbemprunts:27017/dbemprunts
       - url_rabbit=amqp://guest:guest@rabbit:5672
-      - q1=api_client-queue
-      - q2=api_emprunt-queue
-      - q3=api_livre-queue
+      - q1=api_livreS-queue
+      - q3=api_notification-queue
     depends_on:
       - rabbit
       - dbemprunts
@@ -60,9 +56,8 @@ services:
       - port=3000
       - url_mongoose=mongodb://dblivres:27017/dblivres
       - url_rabbit=amqp://guest:guest@rabbit:5672
-      - q1=api_client-queue
-      - q2=api_emprunt-queue
-      - q3=api_livre-queue
+      - q1=api_livreS-queue
+      - q3=api_notification-queue
     depends_on:
       - rabbit
       - dblivres
@@ -73,7 +68,7 @@ services:
     environment:
       - port=3000
       - url_rabbit=amqp://guest:guest@rabbit:5672
-      - q4=api_notification-queue
+      - q3=api_notification-queue
     depends_on:
       - rabbit
   frontend:
@@ -81,8 +76,7 @@ services:
     ports:
       - 3003:3000 # Adjust port if needed
     depends_on:
-      - api_client # Assuming frontend depends on client API
-      # ... other dependencies
+      - api_client
       - api_emprunt
       - api_livre
       - api_notification
