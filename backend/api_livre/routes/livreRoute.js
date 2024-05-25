@@ -48,9 +48,7 @@ routes.post('/', async (req, res) => {
     const livre = await BookModel.create(nouveauLivre);
 
     //si on ajoute un nouveau livre en notif les client de ca
-    channel.consume(qNotif, (data) => {
-      const livre = JSON.parse(data.content.toString());
-    });
+    channel.sendToQueue(qNotif, Buffer.from(JSON.stringify(livre)));
 
     res.status(201).json(livre);
   } catch (error) {

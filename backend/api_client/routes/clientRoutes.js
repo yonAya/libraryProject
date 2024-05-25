@@ -1,7 +1,35 @@
 import express from 'express';
+import amqp from 'amqplib';
 import Client from '../models/clientModel.js';
 
 const routes = express.Router();
+
+var connection, channel;
+const url_rabbit = process.env.url_rabbit;
+const qRequest = process.env.qRequest; // Queue for incoming requests
+const qResponse = process.env.qResponse; // Queue for outgoing responses
+
+const connectRabbitMQ = async () => {
+  connection = await amqp.connect(url_rabbit);
+  channel = await connection.createChannel();
+  await channel.assertQueue(qRequest);
+  await channel.assertQueue(qResponse);
+};
+
+const getClientEmails = async () => {
+  const clients = await Client.find({}).select('email').lean();
+  return clients.map((client) => client.email);
+};
+
+connectRabbitMQ().then(() => {
+  console.log('Client service connected to RabbitMQ');
+
+  channel.consume(qRequest, async (msg) => {
+    const clientEmails = await getClientEmails();
+    channel.sendToQueue(qResponse, Buffer.from(JSON.stringify(clientEmails)));
+    channel.ack(msg);
+  });
+});
 
 // GET - Retrieve information of a specific client by ID
 routes.get('/:idClient', async (req, res) => {

@@ -32,6 +32,8 @@ services:
       - url_mongoose=mongodb://dbclients:27017/dbclients
       - url_rabbit=amqp://guest:guest@rabbit:5672
       - q3=api_notification-queue
+      - qRequest = request-emails-queue
+      - qResponse = response-emails-queue
     depends_on:
       - rabbit
       - dbclients
@@ -69,6 +71,8 @@ services:
       - port=3000
       - url_rabbit=amqp://guest:guest@rabbit:5672
       - q3=api_notification-queue
+      - qRequest = request-emails-queue
+      - qResponse = response-emails-queue
     depends_on:
       - rabbit
   frontend:
