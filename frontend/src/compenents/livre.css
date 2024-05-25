@@ -1,65 +1,47 @@
-/* Container principal */
-.container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-  
-  /* Titre principal */
-  h1 {
-    font-size: 2rem;
-    color: #333;
-    text-align: center;
-  }
-  
-  /* Liste des livres */
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  /* Éléments de la liste des livres */
-  li {
-    margin-bottom: 10px;
-    padding: 10px;
-    background-color: #f9f9f9;
-    border-radius: 5px;
-  }
-  
-  /* Boutons d'action */
-  button {
-    cursor: pointer;
-    padding: 5px 10px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 3px;
-  }
-  
-  /* Bouton Ajouter */
-  button.add-button {
-    margin-top: 20px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  
-  /* Détails du livre */
-  .book-details {
-    margin-top: 20px;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 5px;
-  }
-  
-  /* Détails du livre - Titre */
-  .book-details h2 {
-    font-size: 1.5rem;
-    color: #333;
-  }
-  
-  /* Détails du livre - Propriétés */
-  .book-details p {
-    margin-bottom: 10px;
-  }
-  
+
+.books-container {
+  margin-top: 115px; /* Marge supérieure de 115px */
+}
+
+/* Grille de livres */
+.books-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 5 livres par ligne */
+  gap: 20px; /* Espacement entre les livres */
+}
+
+/* Carte de livre */
+.book-card {
+  background-color: #fff; /* Couleur de fond */
+  border: 1px solid #ddd; /* Bordure */
+  border-radius: 8px; /* Coins arrondis */
+  overflow: hidden; /* Cacher le contenu qui dépasse */
+}
+
+/* Corps de la carte */
+.card-body {
+  padding: 20px; /* Rembourrage */
+}
+
+/* Contenu de la carte */
+.card-content {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Texte du livre */
+.card-text {
+  margin-bottom: 10px; /* Marge inférieure */
+}
+
+/* Conteneur des boutons */
+.buttons-container {
+  display: flex;
+  gap: 10px; /* Espacement entre les boutons */
+}
+
+/* Boutons */
+.MuiButton-root {
+  text-transform: none; /* Pas de transformation de texte */
+  font-weight: 500; /* Poids de la police */
+}
