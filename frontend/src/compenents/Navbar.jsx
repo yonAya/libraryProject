@@ -13,8 +13,8 @@ function Navbar() {
       </div>
       <div className="center">
         <Link to="/livre" className="navbar-button">Livre</Link> 
-        <button className="navbar-button">Emprunt</button>
-        <button className="navbar-button">Client</button>
+       <Link to="ClientListe"   className="navbar-button">Client</Link> 
+       <Link to="Emprunt"   className="navbar-button">Emprunt</Link> 
       </div>
     </div>
   );
