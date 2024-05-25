@@ -28,6 +28,20 @@ connectRabbitMQ().then(() => {
   });
 });
 
+routes.get('/livres', async (req, res) => {
+  try {
+    const livres = await BookModel.find();
+    if (livres.length > 0) {
+      res.status(200).json(livres);
+    } else {
+      res.status(404).json({ message: 'Aucun livre trouvé' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: 'Erreur interne du serveur' });
+  }
+});
+
+
 routes.get('/:idLivre', async (req, res) => {
   const { idLivre } = req.params;
   try {
@@ -47,7 +61,6 @@ routes.post('/', async (req, res) => {
   try {
     const livre = await BookModel.create(nouveauLivre);
 
-    //si on ajoute un nouveau livre en notif les client de ca
     channel.consume(qNotif, (data) => {
       const livre = JSON.parse(data.content.toString());
     });
